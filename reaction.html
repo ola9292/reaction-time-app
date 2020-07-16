@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #circle{
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+            display: none;
+            position: relative;
+        }
+       
+    </style>
+</head>
+<body>
+    <h1>test your reactions</h1>
+    <p>click on the boxes and circles as quickly as you can</p>
+    <div id="sec">reaction time is:</div>
+    <div id="circle">
+
+    </div>
+    
+    <script>
+       function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+        }
+
+       var start = new Date().getTime();
+       function makeShapeAppear(){
+
+        var top = Math.random() * 400;
+        var left = Math.random() * 400;
+        var height = Math.random() * 400;
+        var width = Math.random() * 400;
+
+        if (Math.random() > 0.5) {
+            document.getElementById('circle').style.borderRadius = '50%'
+        }else{
+            document.getElementById('circle').style.borderRadius = '0'
+        }
+
+        document.getElementById('circle').style.backgroundColor = getRandomColor();
+        document.getElementById('circle').style.top = top + "px";
+        document.getElementById('circle').style.left = left + "px";
+        document.getElementById('circle').style.height = height + "px";
+        document.getElementById('circle').style.width = width + "px";
+        document.getElementById('circle').style.display = 'block';
+
+       start = new Date().getTime();
+       }
+
+       function appearAfterDelay(){
+        setTimeout(makeShapeAppear, Math.random() * 2000);
+       }
+
+       appearAfterDelay();
+        document.getElementById('circle').onclick = function(){
+           
+          document.getElementById('circle').style.display = 'none';
+          var end = new Date().getTime();
+            var time = (end - start) / 1000;
+            document.getElementById('sec').innerHTML = time + 's';
+           appearAfterDelay();
+      }
+
+        
+
+       
+    </script>
+</body>
+</html>
